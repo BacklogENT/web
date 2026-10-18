@@ -13,12 +13,25 @@ async function migrate() {
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || '',
     database: process.env.DB_NAME,
-    charset: 'utf8mb4'
+    charset: 'utf8mb4',
+    ssl: false
   });
   try {
     const schema = await fs.readFile(path.join(__dirname, 'schema.sql'), 'utf8');
     const statements = schema.split(/;\s*(?:\r?\n|$)/).map(statement => statement.trim()).filter(Boolean);
-    for (const statement of statements) await connection.query(statement);
+    console.log('Ejecutando', statements.length, 'sentencias SQL...');
+    
+    for (let i = 0; i < statements.length; i++) {
+      try {
+        await connection.query(statements[i]);
+        console.log(`✅ Sentencia ${i + 1}/${statements.length} ejecutada correctamente`);
+      } catch (error) {
+        console.error(`❌ Error en sentencia ${i + 1}/${statements.length}:`, error.message);
+        console.error('SQL:', statements[i]);
+        throw error;
+      }
+    }
+    
     console.log(`Esquema preparado en la base MySQL "${process.env.DB_NAME}". No se insertaron usuarios ni proyectos.`);
   } finally {
     await connection.end();

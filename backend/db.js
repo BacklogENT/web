@@ -12,6 +12,12 @@ if (!Number.isInteger(Number(process.env.DB_PORT || 3306)) ||
   throw new Error('DB_PORT debe ser un número entre 1 y 65535.');
 }
 
+const sslSetting = (process.env.DB_SSL || 'false').toLowerCase();
+const sslOptions =
+  sslSetting === 'required' ? { rejectUnauthorized: false } :
+  sslSetting === 'true' ? true :
+  false;
+
 const pool = mysql.createPool({
   host: process.env.DB_HOST || '127.0.0.1',
   port: Number(process.env.DB_PORT || 3306),
@@ -22,7 +28,8 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
   charset: 'utf8mb4',
-  dateStrings: true
+  dateStrings: true,
+  ssl: sslOptions
 });
 
 async function verifySchema() {

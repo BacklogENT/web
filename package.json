@@ -3,7 +3,8 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "start": "node backend/server.js"
+    "start": "node backend/server.js",
+    "build": "npm install"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

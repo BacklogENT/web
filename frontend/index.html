@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#12307a">
+  <title>Backlog Redeban</title>
+  <link rel="icon" href="https://www.redeban.com/sites/default/files/Logo.png">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./config.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <header>
+    <img class="brand-logo" src="https://www.redeban.com/sites/default/files/Logo.png" alt="Redeban">
+    <h1>Backlog</h1>
+    <span id="who" class="who"></span>
+  </header>
+  <div id="notice" role="status" aria-live="polite"></div>
+  <div id="app">
+    <section class="login">
+      <img src="https://www.redeban.com/sites/default/files/Logo.png" alt="Redeban">
+      <h2>Backlog</h2><p>Ingrese con su cuenta autorizada del sistema.</p>
+      <form id="login-form">
+        <label class="sr-only" for="email">Correo electrónico</label>
+        <input id="email" name="email" type="email" autocomplete="username" placeholder="correo@redeban.com.co" required>
+        <label class="sr-only" for="password">Contraseña</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Contraseña" required>
+        <div id="login-error" class="error" role="alert"></div>
+        <button type="submit">Ingresar</button>
+      </form>
+      <div id="login-options" class="login-options">
+        <button type="button" class="link-button" id="forgot-link">Olvidé mi contraseña</button>
+        <button type="button" class="link-button" id="register-link">Crear cuenta</button>
+      </div>
+      <p class="muted">Los permisos se validan en el servidor; no se aceptan roles enviados por el navegador.</p>
+    </section>
+  </div>
+  <dialog id="dlg" aria-labelledby="dialog-title"></dialog>
+</body>
+</html>

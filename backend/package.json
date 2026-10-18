@@ -1,0 +1,28 @@
+{
+  "name": "redeban-backlog",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Backend MySQL local para Backlog Redeban con autenticación",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "db:migrate": "node migrate.js",
+    "db:projects": "node show-projects.js",
+    "user:create": "node create-user.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.1",
+    "nodemailer": "^10.1.2",
+    "zod": "^3.24.1"
+  }
+}
